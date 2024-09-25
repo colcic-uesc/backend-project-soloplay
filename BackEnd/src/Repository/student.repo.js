@@ -2,7 +2,21 @@
 
 
 module.exports = class studentRepo {
-  alunos = [];
+  alunos = [{
+    "id":0,
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "skills": [
+      {
+        "id":1,
+        "name": "java"
+      },
+      {
+        "id":2,
+        "name":"python"
+      }
+    ]
+  }];
 
   create(params) {
     params["id"] = this.alunos.length;
