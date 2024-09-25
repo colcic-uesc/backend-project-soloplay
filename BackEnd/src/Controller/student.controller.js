@@ -1,26 +1,25 @@
-const bkrypt = require('bcryptjs');
 const studentRepository = require("../Repository/student.repo");
 const repo = new studentRepository()
 
 module.exports = class studentController {
 
-  async createAccount(request, response) {
+  async createStudent(request, response) {
 
-    const account = request.body;
+    const student = request.body;
   
     try{        
-        //const result = await accountRepo.addAccount( account );
-        if( account != null ){
 
-          const result = repo.create(account);
-          return response.status(201).json({ result: account });
+        if( student != null ){
+
+          repo.create(student);
+          return response.status(201).json({ "result": student });
+
         }else{
           return response.status(400).json({ "result" : "something is wrong" })
         }
   
     }catch(erro){
 
-      console.log(erro)
         return response.status(500).json({"erro" : erro})
     }
   
@@ -35,18 +34,18 @@ module.exports = class studentController {
 
     }catch( e ){
 
-      console.log(e)
+      return response.status(500).json({ "erro": erro });
 
     }
 
   }
 
-  async updateAccount( request, response ) {
+  async updateStudent( request, response ) {
 
-    const account = request.body;
+    const student = request.body;
   
     try{        
-        const result = await repo.update( account );
+        const result = await repo.update( student );
         if( result ){
           return response.status( 201 ).json( { "result" : result } )
         }else{
@@ -60,7 +59,7 @@ module.exports = class studentController {
   
   }
 
-  async deleteAccountId(request, response) {
+  async deleteStudentId(request, response) {
 
     const { id } = request.query;
 
@@ -73,13 +72,12 @@ module.exports = class studentController {
         }
   
     }catch(erro){
-        console.log(erro)
         return response.status(500).json({"erro" : erro})
     }
   
   }
 
-  async getAllAccount( request, response ) {
+  async getAllStudent( request, response ) {
   
     try{
 

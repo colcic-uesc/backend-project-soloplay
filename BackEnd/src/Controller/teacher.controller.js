@@ -1,4 +1,3 @@
-const bkrypt = require('bcryptjs');
 const teacherRepository = require("../Repository/teacher.repo");
 const repo = new teacherRepository()
 

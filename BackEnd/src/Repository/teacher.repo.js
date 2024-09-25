@@ -1,7 +1,4 @@
-
-
-
-module.exports = class teacherRepo {
+module.exports = class studentRepo {
   teacher = [];
 
   create(params) {
@@ -15,16 +12,19 @@ module.exports = class teacherRepo {
   }
 
   update(params) {
-    let array = this.teacher.find((elemente) => elemente.id == params.id);
-    this.teacher[array.id].name = params.name;
-    this.teacher[array.id].email = params.email;
-    return array;
+
+    const id = params.id;
+    let array = this.teacher.find((elemente) => elemente.id == id);
+    if (array) {
+      this.teacher[id].name = params.name;
+      this.teacher[id].email = params.email;
+      return array;
+    }
+    return null;
   }
 
   delete(params) {
-
     let array = this.teacher.filter((elemente) => elemente.id != params);
-    return this.teacher = array;
-
+    return (this.teacher = array);
   }
 };

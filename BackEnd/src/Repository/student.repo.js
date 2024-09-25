@@ -15,10 +15,16 @@ module.exports = class studentRepo {
   }
 
   update(params) {
-    let array = this.alunos.find((elemente) => elemente.id == params.id);
-    this.alunos[array.id].name = params.name;
-    this.alunos[array.id].email = params.email;
-    return array;
+
+    const id = params.id;
+    let array = this.alunos.find((elemente) => elemente.id == id);
+    if( array ) {
+      this.alunos[id].name = params.name;
+      this.alunos[id].email = params.email;
+      return array;
+    }
+    return null;
+    
   }
 
   delete(params) {
