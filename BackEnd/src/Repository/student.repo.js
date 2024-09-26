@@ -17,7 +17,7 @@ module.exports = class studentRepo {
   findById(params) {
 
     const id = params.studentId;
-    let array = this.alunos.find((elemente) => elemente.id == id);
+    let array = this.alunos.find((element) => element.id == id);
     if( array ){ return true; }
     return null;
 

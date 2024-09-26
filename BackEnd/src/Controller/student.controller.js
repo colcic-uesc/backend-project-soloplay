@@ -77,4 +77,22 @@ module.exports = class studentController {
 
   }
 
+  findById( data ) {
+  
+    try{
+
+      const result = repo.findById( data )
+      if(result){
+        console.log("veio")
+        return result
+      }
+      return null
+  
+    }catch(erro){
+
+      return null
+    }
+
+  }
+
 }

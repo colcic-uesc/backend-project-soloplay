@@ -40,6 +40,24 @@ module.exports = class studentController {
 
   }
 
+  findById( data ) {
+  
+    try{
+
+      const result = repo.findById( data )
+      if(result){
+        return result
+      }
+      return null
+  
+    }catch(erro){
+
+      return null
+
+    }
+
+  }
+
   async updateTeacher( request, response ) {
 
     const teacher = request.body;

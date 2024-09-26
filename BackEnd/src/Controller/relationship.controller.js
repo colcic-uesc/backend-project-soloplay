@@ -1,8 +1,8 @@
-const studentRepository = require("../Repository/student.repo");
-const teacherRepository = require("../Repository/teacher.repo");
+const studentController = require("../Controller/student.controller");
+const teacherController = require("../Controller/teacher.controller");
 const relationshipRepository = require("../Repository/relationship.repo");
-const repoStudent = new studentRepository();
-const repoTeacher = new teacherRepository();
+const contStudent = new studentController();
+const contTeacher = new teacherController();
 const repoRelationship = new relationshipRepository();
 
 module.exports = class studentController {
@@ -15,12 +15,12 @@ module.exports = class studentController {
 
         if( data != null ){
 
-            const student = repoStudent.findById(data)
-            const teacher = repoTeacher.findById(data)
+            const student = contStudent.findById(data)
+            const teacher = contTeacher.findById(data)
             console.log(student, teacher)
             if( student && teacher ){
 
-                await repoRelationship.create( data )
+                repoRelationship.create( data )
                 return response.status(201).json({ "result": data });
 
             }
