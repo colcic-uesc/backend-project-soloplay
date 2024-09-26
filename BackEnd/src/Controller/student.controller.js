@@ -38,7 +38,6 @@ module.exports = class studentController {
         }
   
     }catch( erro ){
-        console.log(erro)
         return response.status( 400 ).json({"erro" : "Not Exits Or Data Invalid"});
     }
   
@@ -83,7 +82,6 @@ module.exports = class studentController {
 
       const result = repo.findById( data )
       if(result){
-        console.log("veio")
         return result
       }
       return null

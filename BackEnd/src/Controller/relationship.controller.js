@@ -17,7 +17,6 @@ module.exports = class studentController {
 
             const student = contStudent.findById(data)
             const teacher = contTeacher.findById(data)
-            console.log(student, teacher)
             if( student && teacher ){
 
                 repoRelationship.create( data )
@@ -49,6 +48,24 @@ module.exports = class studentController {
 
     }
 
+  }
+
+  async deleteRelationShipId(request, response) {
+
+    const { id } = request.query;
+
+    try{        
+        const result = await repoRelationship.delete(id);
+        if( result ){
+          return response.status(201).json({ "result" : "Removed" })
+        }else{
+          return response.status(400).json({ "result" : "Not Exits" })
+        }
+  
+    }catch(erro){
+        return response.status(500).json({"erro" : erro})
+    }
+  
   }
 
 }

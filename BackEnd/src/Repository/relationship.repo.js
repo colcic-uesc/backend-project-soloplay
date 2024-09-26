@@ -23,4 +23,9 @@ module.exports = class relationshipRepo {
         return this.teacher_student;
     }
 
+    delete(params) {
+        let array = this.teacher_student.filter((elemente) => elemente.id != params);
+        return (this.teacher_student = array);
+      }
+
   };

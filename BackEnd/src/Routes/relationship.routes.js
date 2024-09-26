@@ -7,9 +7,7 @@ const relationshipController = new RelationshipController()
 router.get("/relationship", async ( request, response ) => { await relationshipController.findAllRelationShip( request, response ) })
 //Criar uma conta
 router.post("/relationship", async (request, response) => { await relationshipController.createRelationShip( request, response ) })
-//Atualizar um conta
-router.put("/relationship", async (request, response) => {  })
 //Deletar uma conta pelo id
-router.delete("/relationship", async (request, response) => {  })
+router.delete("/relationship", async (request, response) => { await relationshipController.deleteRelationShipId( request, response ) })
 
 module.exports = router

@@ -18,8 +18,6 @@ module.exports = class studentController {
         }
   
     }catch(erro){
-
-      console.log(erro)
         return response.status(500).json({"erro" : erro})
     }
   
@@ -34,7 +32,7 @@ module.exports = class studentController {
 
     }catch( e ){
 
-      console.log(e)
+      return response.status(500).json({"erro" : e})
 
     }
 
@@ -71,7 +69,6 @@ module.exports = class studentController {
         }
   
     }catch( erro ){
-        console.log(erro)
         return response.status( 400 ).json({"erro" : "Not Exits Or Data Invalid"});
     }
   
@@ -90,7 +87,6 @@ module.exports = class studentController {
         }
   
     }catch(erro){
-        console.log(erro)
         return response.status(500).json({"erro" : erro})
     }
   
