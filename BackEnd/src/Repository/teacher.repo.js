@@ -1,19 +1,5 @@
 module.exports = class studentRepo {
-  teacher = [{
-    "id":0,
-    "name": "admin",
-    "email": "admin@gmail.com",
-    "projects": [
-      {
-        "id":1,
-        "name": "java"
-      },
-      {
-        "id":2,
-        "name":"python"
-      }
-    ]
-  }];
+  teacher = [];
 
   create(params) {
     params["id"] = this.teacher.length;
@@ -23,6 +9,15 @@ module.exports = class studentRepo {
 
   findAll(params) {
     return this.teacher;
+  }
+
+  findById(params) {
+    
+    const id = params.teacherId;
+    let array = this.teacher.find((elemente) => elemente.id == id);
+    if( array ){ return true; }
+    return null;
+
   }
 
   update(params) {

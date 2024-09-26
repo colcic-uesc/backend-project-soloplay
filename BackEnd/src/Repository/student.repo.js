@@ -2,21 +2,7 @@
 
 
 module.exports = class studentRepo {
-  alunos = [{
-    "id":0,
-    "name": "admin",
-    "email": "admin@gmail.com",
-    "skills": [
-      {
-        "id":1,
-        "name": "java"
-      },
-      {
-        "id":2,
-        "name":"python"
-      }
-    ]
-  }];
+  alunos = [];
 
   create(params) {
     params["id"] = this.alunos.length;
@@ -24,8 +10,17 @@ module.exports = class studentRepo {
     return this.params;
   }
 
-  findAll(params) {
+  findAll() {
     return this.alunos;
+  }
+
+  findById(params) {
+
+    const id = params.studentId;
+    let array = this.alunos.find((elemente) => elemente.id == id);
+    if( array ){ return true; }
+    return null;
+
   }
 
   update(params) {

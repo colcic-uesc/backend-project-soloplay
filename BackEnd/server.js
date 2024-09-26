@@ -1,5 +1,7 @@
 const express =  require(`express`);
 const studentRouter = require('./src/Routes/student.routes');
+const teacherRouter = require('./src/Routes/teacher.routes');
+const relationshipRouter = require('./src/Routes/relationship.routes');
 
 const app = express();
 app.use( express.json() );
@@ -12,5 +14,7 @@ var corsOptions = {
 }
 
 app.use( studentRouter );
+app.use( teacherRouter );
+app.use( relationshipRouter );
 
 app.listen(3001, () => console.log( "server is running!" ) );

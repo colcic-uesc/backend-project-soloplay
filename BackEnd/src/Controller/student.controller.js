@@ -25,21 +25,6 @@ module.exports = class studentController {
   
   }
 
-  async findAll( request, response ) {
-
-    try{
-
-      const result = await emailRepo.findAll();
-      return response.status( 201 ).json( result );
-
-    }catch( e ){
-
-      return response.status(500).json({ "erro": erro });
-
-    }
-
-  }
-
   async updateStudent( request, response ) {
 
     const student = request.body;
@@ -77,7 +62,7 @@ module.exports = class studentController {
   
   }
 
-  async getAllStudent( request, response ) {
+  async findAllStudent( request, response ) {
   
     try{
 
