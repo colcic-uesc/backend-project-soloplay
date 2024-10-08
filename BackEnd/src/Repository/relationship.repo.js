@@ -1,4 +1,4 @@
-
+const { StudentTeacher } = require("../DataBase/models");
 
 
 module.exports = class relationshipRepo {

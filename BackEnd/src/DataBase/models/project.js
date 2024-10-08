@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany( models.Teachers, { foreignKey: { name: "teacherProjectFK", target: "teacherId" }, constraints: false } );
+      this.belongsTo(models.Teacher, { 
+        foreignKey: { name: "teacherProjectFK", field: "teacherId", constraints: false  } // chave estrangeira
+        
+      });
     }
   }
   Project.init({
@@ -21,5 +24,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Project',
   });
-  return Project;
-};
+  ;return Project;
+}

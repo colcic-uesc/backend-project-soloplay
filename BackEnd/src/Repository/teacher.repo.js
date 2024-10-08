@@ -1,39 +1,71 @@
+const { Teacher, Project } = require("../DataBase/models");
+const project = require("../DataBase/models/project");
+
+
 module.exports = class studentRepo {
-  teacher = [];
 
-  create(params) {
-    params["id"] = this.teacher.length;
-    this.teacher.push(params);
-    return this.params;
+  async createTeacher(teacher) {  
+
+    console.log(teacher.project[0])
+    return await Teacher.create({ 
+      
+      name: teacher.name,
+      email: teacher.email,
+      project: {
+        name: teacher.project[0].name,
+        description: teacher.project[0].description
+      }
+     },
+     {
+        include: [
+          {
+            association: [Project],
+          },
+        ],
+      }
+    );
+
   }
 
-  findAll(params) {
-    return this.teacher;
-  }
+  async findAllTeacher(){
 
-  findById(params) {
+    return await Teacher.findAll();
+
+  };
+
+  async findTeacherById(id) {
     
-    const id = params.teacherId;
-    let array = this.teacher.find((elemente) => elemente.id == id);
-    if( array ){ return true; }
-    return null;
-
+    await Teacher.findById(
+      {
+        where: {
+            id,
+        },
+    });
   }
 
-  update(params) {
+  async updateTeacher(id, name, email) {
 
-    const id = params.id;
-    let array = this.teacher.find((elemente) => elemente.id == id);
-    if (array) {
-      this.teacher[id].name = params.name;
-      this.teacher[id].email = params.email;
-      return array;
-    }
-    return null;
+    return await Teacher.update(
+    
+      {
+        name: name ? name : Teacher.name,
+        email: email ? email : Teacher.email
+      },
+      {
+        where: {
+            id,
+        },
+    });
+    
   }
 
-  delete(params) {
-    let array = this.teacher.filter((elemente) => elemente.id != params);
-    return (this.teacher = array);
+  async deleteTeacherById(id) {
+    
+    await Teacher.destroy(
+      {
+        where: {
+            id,
+        },
+    });
   }
 };

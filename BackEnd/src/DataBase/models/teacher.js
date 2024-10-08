@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany( models.Project, { constraints: false } )
-      this.hasMany( models.StudentTeacher, { constraints: false } )
+      this.belongsToMany( models.Student, { through: "StudentTeacher", constraints: false } )
     }
   }
   Teacher.init({

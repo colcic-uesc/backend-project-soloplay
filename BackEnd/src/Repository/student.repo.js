@@ -1,4 +1,4 @@
-
+const { Student } = require("../DataBase/models");
 
 
 module.exports = class studentRepo {

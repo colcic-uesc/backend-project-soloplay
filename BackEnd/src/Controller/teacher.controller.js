@@ -1,52 +1,49 @@
 const teacherRepository = require("../Repository/teacher.repo");
-const repo = new teacherRepository()
+const projectRepository = require("../Repository/project.repo");
+const repo = new teacherRepository();
+const prorepo = new projectRepository();
 
 module.exports = class studentController {
 
   async createTeacher(request, response) {
 
     const teacher = request.body;
+    const project = teacher.project;
   
     try{        
 
         if( teacher != null ){
 
-          const result = repo.create(teacher);
+          const resultTeatcher = await repo.createTeacher(teacher);
+          console.log("Result: ",resultTeatcher.dataValues.id)
+          // await project.find((element) => {
+          //   console.log(element)
+          //   prorepo.createProject(resultTeatcher.dataValues.id, element.name, element.description)
+          // })
+
           return response.status(201).json({ result: teacher });
+
         }else{
           return response.status(400).json({ "result" : "something is wrong" })
         }
   
     }catch(erro){
+      console.log(erro)
         return response.status(500).json({"erro" : erro})
     }
   
   }
 
-  async findAll( request, response ) {
-
-    try{
-
-      const result = await emailRepo.findAll();
-      return response.status( 201 ).json( result );
-
-    }catch( e ){
-
-      return response.status(500).json({"erro" : e})
-
-    }
-
-  }
-
-  findById( data ) {
+  async findById( id ) {
   
     try{
 
-      const result = repo.findById( data )
-      if(result){
-        return result
+      const result = await repo.findTeacherById( id )
+      if( result ){
+        return response.status( 201 ).json( { "result" : result } )
+      }else{
+        return response.status( 400 ).json( { "result" : "Not Exits Or Data Invalid" } )
       }
-      return null
   
     }catch(erro){
 
@@ -79,7 +76,7 @@ module.exports = class studentController {
     const { id } = request.query;
 
     try{        
-        const result = await repo.delete(id);
+        const result = await repo.deleteTeacherById(id);
         if( result ){
           return response.status(201).json({ "result" : "Removed" })
         }else{
@@ -96,8 +93,12 @@ module.exports = class studentController {
   
     try{
 
-      const result = await repo.findAll()
-      return response.status(201).json( { result } )
+      const result = await repo.findAllTeacher()
+      if( result ){
+        return response.status(201).json({ "result" : "Removed" })
+      }else{
+        return response.status(400).json({ "result" : "Not Exits" })
+      }
   
     }catch(erro){
 
