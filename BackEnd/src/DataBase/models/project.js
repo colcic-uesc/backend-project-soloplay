@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
             name: 'teacherProjectFK',  // Nome da chave estrangeira (alias)
             field: 'teacherId'         // Nome da coluna no banco de dados
           },
-          constraints: false           // Se você quer desativar as constraints (opcional)
+          constraints: false,
+          onDelete: 'cascade'  // Se você quer desativar as constraints (opcional)
         });
       }
   }

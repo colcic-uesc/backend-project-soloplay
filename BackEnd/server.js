@@ -2,6 +2,8 @@ const express =  require(`express`);
 const studentRouter = require('./src/Routes/student.routes');
 const teacherRouter = require('./src/Routes/teacher.routes');
 const relationshipRouter = require('./src/Routes/relationship.routes');
+const projectRouter = require('./src/Routes/project.routes');
+const skillRouter = require('./src/Routes/skill.routes');
 
 const app = express();
 app.use( express.json() );
@@ -13,7 +15,9 @@ var corsOptions = {
     optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
+app.use( skillRouter );
 app.use( studentRouter );
+app.use( projectRouter );
 app.use( teacherRouter );
 app.use( relationshipRouter );
 

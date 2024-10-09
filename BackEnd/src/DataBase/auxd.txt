@@ -3,3 +3,6 @@ npx sequelize-cli model:generate --name Teacher --attributes name:string,email:s
 npx sequelize-cli model:generate --name StudentTeacher --attributes studentId:integer,teacherId:integer --force
 npx sequelize-cli model:generate --name Skills --attributes studentId:integer,name:string,description:string --force
 npx sequelize-cli model:generate --name Project --attributes teacherId:integer,name:string,description:string --force
+
+
+npx sequelize-cli db:migrate
