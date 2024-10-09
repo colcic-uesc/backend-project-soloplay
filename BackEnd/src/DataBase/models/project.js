@@ -10,11 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Teacher, { 
-        foreignKey: { name: "teacherProjectFK", field: "teacherId", constraints: false  } // chave estrangeira
-        
-      });
-    }
+
+        this.belongsTo(models.Teacher, { 
+          foreignKey: {
+            name: 'teacherProjectFK',  // Nome da chave estrangeira (alias)
+            field: 'teacherId'         // Nome da coluna no banco de dados
+          },
+          constraints: false           // Se você quer desativar as constraints (opcional)
+        });
+      }
   }
   Project.init({
     teacherId: DataTypes.INTEGER,

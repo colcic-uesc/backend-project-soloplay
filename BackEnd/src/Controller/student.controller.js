@@ -11,7 +11,7 @@ module.exports = class studentController {
 
         if( student != null ){
 
-          repo.create(student);
+          const result = repo.createStudent(student);
           return response.status(201).json({ "result": student });
 
         }else{
@@ -65,7 +65,7 @@ module.exports = class studentController {
   
     try{
 
-      const result = await repo.findAll()
+      const result = await repo.findAllStudent()
       return response.status(201).json( { result } )
   
     }catch(erro){
@@ -76,11 +76,13 @@ module.exports = class studentController {
 
   }
 
-  findById( data ) {
+  findById( request, response ) {
+
+    const { id } = request.query;
   
     try{
 
-      const result = repo.findById( data )
+      const result = repo.findStudentById( id )
       if(result){
         return result
       }

@@ -1,45 +1,66 @@
-const { Student } = require("../DataBase/models");
+const { Student, Skills } = require("../DataBase/models");
 
 
 module.exports = class studentRepo {
-  alunos = [];
 
-  create(params) {
-    params["id"] = this.alunos.length;
-    this.alunos.push(params);
-    return this.params;
-  }
+  async createStudent(student) {  
 
-  findAll() {
-    return this.alunos;
-  }
-
-  findById(params) {
-
-    const id = params.studentId;
-    let array = this.alunos.find((element) => element.id == id);
-    if( array ){ return true; }
-    return null;
+    return await Student.create({
+      name: student.name,
+      email: student.email,
+      Skills: student.Skills, // A lista de projetos relacionada ao professor
+      },
+      {
+        include: [
+          {
+            model: Skills, // Inclui o modelo relacionado
+          },
+        ],
+      }
+    );
 
   }
 
-  update(params) {
+  async findAllStudent(){
 
-    const id = params.id;
-    let array = this.alunos.find((elemente) => elemente.id == id);
-    if( array ) {
-      this.alunos[id].name = params.name;
-      this.alunos[id].email = params.email;
-      return array;
-    }
-    return null;
+    return await Student.findAll({
+      include: [{
+        model: Skills,
+        attributes: [ 'name', 'description' ]
+      }]
+    });
+
+  };
+
+  async findStudentById(id) {
+    return await Student.findByPk(id, {
+      include: [Skills], // Inclui o relacionamento com Project
+    });
+  }
+
+  async updateStudent(id, name, email) {
+
+    return await Student.update(
+    
+      {
+        name: name ? name : Student.name,
+        email: email ? email : Student.email
+      },
+      {
+        where: {
+            id,
+        },
+    });
     
   }
 
-  delete(params) {
-
-    let array = this.alunos.filter((elemente) => elemente.id != params);
-    return this.alunos = array;
-
+  async deleteStudentById(id) {
+    
+    return await Student.destroy(
+      {
+        where: {
+            id,
+        },
+    });
   }
 };

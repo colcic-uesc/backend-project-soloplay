@@ -1,25 +1,19 @@
 const { Teacher, Project } = require("../DataBase/models");
-const project = require("../DataBase/models/project");
 
 
 module.exports = class studentRepo {
 
   async createTeacher(teacher) {  
 
-    console.log(teacher.project[0])
-    return await Teacher.create({ 
-      
+    return await Teacher.create({
       name: teacher.name,
       email: teacher.email,
-      project: {
-        name: teacher.project[0].name,
-        description: teacher.project[0].description
-      }
-     },
-     {
+      Projects: teacher.Projects, // A lista de projetos relacionada ao professor
+      },
+      {
         include: [
           {
-            association: [Project],
+            model: Project, // Inclui o modelo relacionado
           },
         ],
       }
@@ -29,17 +23,18 @@ module.exports = class studentRepo {
 
   async findAllTeacher(){
 
-    return await Teacher.findAll();
+    return await Teacher.findAll({
+      include: [{
+        model: Project,
+        attributes: [ 'name', 'description' ]
+      }]
+    });
 
   };
 
   async findTeacherById(id) {
-    
-    await Teacher.findById(
-      {
-        where: {
-            id,
-        },
+    return await Teacher.findByPk(id, {
+      include: [Project], // Inclui o relacionamento com Project
     });
   }
 
@@ -61,7 +56,7 @@ module.exports = class studentRepo {
 
   async deleteTeacherById(id) {
     
-    await Teacher.destroy(
+    return await Teacher.destroy(
       {
         where: {
             id,

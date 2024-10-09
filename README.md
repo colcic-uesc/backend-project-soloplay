@@ -68,16 +68,15 @@ Metodo: POST   ->  http://localhost:3000/teacher
 ```json
 body
 {
-   "id":0,
-   "name": "admin",
-   "email": "admin@gmail.com",
-   "skills": [
-     {
+    "name": "Jose",
+    "email": "Jose@gmail.com",
+    "Projects": [
+      {
         "name": "java",
-        "description": "string"
-     }
-   ]
-}
+				"description": "java"
+      }
+    ]
+  }
 ```
 
 Metodo: PUT    ->  http://localhost:3000/teacher
@@ -85,17 +84,16 @@ Metodo: PUT    ->  http://localhost:3000/teacher
 ```json
 body
 {
-   "id":0,
-   "name": "admin",
-   "email": "admin@gmail.com",
-   "skills": [
-     {
-        "id": 0,
-        "name": "java",
-        "description": "string"
-     }
-   ]
-}
+   "id": 0,
+   "name": "Jose Editado",
+   "email": "Jose@gmail.com",
+   "Projects": [
+      {
+         "name": "java",
+         "description": "java"
+      }
+    ]
+  }
 ```
 
 Metodo: DELETE ->  http://localhost:3000/teacher?{id}

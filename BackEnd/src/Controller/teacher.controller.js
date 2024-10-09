@@ -1,5 +1,6 @@
 const teacherRepository = require("../Repository/teacher.repo");
 const projectRepository = require("../Repository/project.repo");
+const e = require("express");
 const repo = new teacherRepository();
 const prorepo = new projectRepository();
 
@@ -55,12 +56,14 @@ module.exports = class studentController {
 
   async updateTeacher( request, response ) {
 
-    const teacher = request.body;
+    const {id, name, email} = request.body;
+
+    console.log(id, name, email)
   
     try{        
-        const result = await repo.update( teacher );
+        const result = await repo.updateTeacher( id, name, email );
         if( result ){
-          return response.status( 201 ).json( { "result" : result } )
+          return response.status( 201 ).json( { "result" : request.body } )
         }else{
           return response.status( 400 ).json( { "result" : "Not Exits Or Data Invalid" } )
         }
@@ -78,9 +81,9 @@ module.exports = class studentController {
     try{        
         const result = await repo.deleteTeacherById(id);
         if( result ){
-          return response.status(201).json({ "result" : "Removed" })
+          return response.status(200).json({ "result" : "Removed" })
         }else{
-          return response.status(400).json({ "result" : "Not Exits" })
+          return response.status(400).json({ "result" : "Not Exits Or Data Invalid" })
         }
   
     }catch(erro){
@@ -95,7 +98,7 @@ module.exports = class studentController {
 
       const result = await repo.findAllTeacher()
       if( result ){
-        return response.status(201).json({ "result" : "Removed" })
+        return response.status(201).json({ "result" : result })
       }else{
         return response.status(400).json({ "result" : "Not Exits" })
       }
