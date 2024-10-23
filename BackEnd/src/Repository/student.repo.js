@@ -33,9 +33,10 @@ module.exports = class studentRepo {
   };
 
   async findStudentById(id) {
-    return await Student.findByPk(id, {
-      include: [Skills], // Inclui o relacionamento com Project
-    });
+    return await Student.findByPk(
+            id, {
+        include: [Skills], // Inclui o relacionamento com Project
+      });
   }
 
   async updateStudent(id, name, email) {

@@ -1,6 +1,6 @@
 // middlewares/addResponseHeaders.js
-const addResponseHeaders = (req, res, next) => {
-  res.setHeader('X-APP-NAME', 'MyExpressApp');
+const addResponseHeaders = (request, response, next) => {
+  res.setHeader('X-APP-NAME', 'BackEnd-Project-SoloPlay');
   res.setHeader('X-APP-API-VERSION', '0.1');
   next();
 };

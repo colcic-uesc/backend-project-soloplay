@@ -9,18 +9,18 @@ module.exports = class studentController {
 
   async createRelationShip(request, response) {
 
-    const data = request.body;
+    const { studentId, teacherId } = request.body;
   
     try{        
 
-        if( data != null ){
+        if( studentId != null && teacherId != null ){
 
-            const student = contStudent.findById(data)
-            const teacher = contTeacher.findById(data)
+            const student = contStudent.findById(studentId)
+            const teacher = contTeacher.findById(teacherId)
             if( student && teacher ){
 
-                repoRelationship.create( data )
-                return response.status(201).json({ "result": data });
+                repoRelationship.createRelationShip( teacherId, studentId)
+                return response.status(201).json({ "result": "Criado" });
 
             }
             return response.status(400).json({ "result" : "something is wrong" })
@@ -39,10 +39,13 @@ module.exports = class studentController {
 
     try{
 
-      const result = await repoRelationship.findAll();
-      return response.status( 201 ).json( {"result": result} );
+      const result = await repoRelationship.findAllRelationShip();
+      if(result){
+        return response.status( 201 ).json( {"result": result} );
+      }
+      return response.status(400).json({ "result" : "something is wrong" })
 
-    }catch( e ){
+    }catch( erro ){
 
       return response.status(500).json({ "erro": erro });
 
@@ -55,7 +58,7 @@ module.exports = class studentController {
     const { id } = request.query;
 
     try{        
-        const result = await repoRelationship.delete(id);
+        const result = await repoRelationship.findRelationShipById(id);
         if( result ){
           return response.status(201).json({ "result" : "Removed" })
         }else{

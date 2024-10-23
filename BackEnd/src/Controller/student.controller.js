@@ -97,9 +97,28 @@ module.exports = class studentController {
 
   }
 
-  findById( request, response ) {
+  findStudentById( request, response ) {
 
     const { id } = request.query;
+  
+    try{
+
+      const result = repo.findStudentById( id )
+      if(result){
+        return response.status(201).json( { result } )
+      }
+      return response.status( 400 ).json({"erro" : "Not Exits Or Data Invalid"});
+
+  
+    }catch(erro){
+
+      return response.status(500).json( { "erro" : erro } )
+
+    }
+
+  }
+
+  findById( id ) {
   
     try{
 
@@ -112,6 +131,7 @@ module.exports = class studentController {
     }catch(erro){
 
       return null
+
     }
 
   }

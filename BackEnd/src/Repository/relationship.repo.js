@@ -2,30 +2,26 @@ const { StudentTeacher } = require("../DataBase/models");
 
 
 module.exports = class relationshipRepo {
-    teacher_student = [];
+
+    async createRelationShip(teacherId, studentId) {  
   
-    async create(params) {
-
-      params["id"] = this.teacher_student.length;
-      this.teacher_student.push(params);
-      return this.params;
-
+      return await StudentTeacher.create({ teacherId, studentId });
+  
     }
-
-    delete(params) {
-
-        let array = this.teacher_student.filter((elemente) => elemente.id != params);
-        return this.teacher_student = array;
-    
+  
+    async findAllRelationShip(){
+  
+      return await StudentTeacher.findAll();
+  
+    };
+  
+    async findRelationShipById(id) {
+      
+      await StudentTeacher.findById(
+        {
+          where: {
+              id,
+          },
+      });
     }
-
-    findAll(params) {
-        return this.teacher_student;
-    }
-
-    delete(params) {
-        let array = this.teacher_student.filter((elemente) => elemente.id != params);
-        return (this.teacher_student = array);
-      }
-
   };

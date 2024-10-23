@@ -33,7 +33,12 @@ module.exports = class studentRepo {
   };
 
   async findTeacherById(id) {
-    return await Teacher.findByPk(id, {
+    return await Teacher.findByPk(
+      {
+        where: {
+            id,
+        },
+      }, {
       include: [Project], // Inclui o relacionamento com Project
     });
   }

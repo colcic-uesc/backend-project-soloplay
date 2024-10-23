@@ -11,7 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany( models.Project, { foreignKey: 'teacherProjectFK' } )
-      this.belongsToMany( models.Student, { through: "StudentTeacher", constraints: false } )
+      this.belongsToMany( models.Student, { 
+        foreignKey: "teacherId", // Definindo a chave estrangeira do professor
+        otherKey: "studentId", // Definindo a chave estrangeira do aluno
+        through: "StudentTeacher", 
+        constraints: false 
+      } )
     }
   }
   Teacher.init({
