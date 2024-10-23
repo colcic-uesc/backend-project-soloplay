@@ -54,7 +54,7 @@ module.exports = class studentRepo {
     
   }
 
-  async deleteStudentById(id) {
+  async deleteStudent(id) {
     
     return await Student.destroy(
       {

@@ -48,7 +48,7 @@ module.exports = class studentController {
     const { id } = request.query;
 
     try{        
-        const result = await repo.delete(id);
+        const result = await repo.deleteStudent(id);
         if( result ){
           return response.status(201).json({ "result" : "Removed" })
         }else{
