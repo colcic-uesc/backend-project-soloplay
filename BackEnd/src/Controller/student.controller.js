@@ -1,5 +1,7 @@
 const studentRepository = require("../Repository/student.repo");
-const repo = new studentRepository()
+const skillRepository = require("../Repository/skill.repo");
+const repo = new studentRepository();
+const skillrepo = new skillRepository();
 
 module.exports = class studentController {
 
@@ -67,6 +69,25 @@ module.exports = class studentController {
 
       const result = await repo.findAllStudent()
       return response.status(201).json( { result } )
+  
+    }catch(erro){
+
+      return response.status(500).json( { "erro" : erro } )
+
+    }
+
+  }
+
+  async findAllSkill( request, response ) {
+  
+    try{
+
+      const result = await skillrepo.findAllSkills()
+      if(result){
+        return response.status(201).json( { result } )
+      }
+      return response.status( 400 ).json({"erro" : "Not Exits Or Data Invalid"});
+
   
     }catch(erro){
 

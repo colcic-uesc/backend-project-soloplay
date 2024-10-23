@@ -100,9 +100,15 @@ Metodo: DELETE ->  http://localhost:3000/teacher?{id}
 
 Metodo: GET    ->  http://localhost:3000/teacher
 
+**End-Point Skill.**
 
+Metodo: GET    ->  http://localhost:3000/skill
 
-**End-Point Student/Teacher.**
+**End-Point Project.**
+
+Metodo: GET    ->  http://localhost:3000/project
+
+<!-- **End-Point Student/Teacher.**
 
 Metodo: POST   ->  http://localhost:3000/relationship
 
@@ -116,6 +122,6 @@ body
 
 Metodo: DELETE ->  http://localhost:3000/relationship?{id}
 
-Metodo: GET    ->  http://localhost:3000/relationship
+Metodo: GET    ->  http://localhost:3000/relationship -->
 
 ## Front

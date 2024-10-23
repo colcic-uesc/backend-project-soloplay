@@ -16,14 +16,13 @@ module.exports = class studentController {
         if( teacher != null ){
 
           const resultTeatcher = await repo.createTeacher(teacher);
-          console.log("Result: ",resultTeatcher.dataValues.id)
-          // await project.find((element) => {
-          //   console.log(element)
-          //   prorepo.createProject(resultTeatcher.dataValues.id, element.name, element.description)
-          // })
+          if(resultTeatcher){
+            return response.status(201).json({ result: teacher });
 
-          return response.status(201).json({ result: teacher });
+          }
 
+          return response.status(400).json({ "result" : "something is wrong" })
+          
         }else{
           return response.status(400).json({ "result" : "something is wrong" })
         }
@@ -97,6 +96,25 @@ module.exports = class studentController {
     try{
 
       const result = await repo.findAllTeacher()
+      if( result ){
+        return response.status(201).json({ "result" : result })
+      }else{
+        return response.status(400).json({ "result" : "Not Exits" })
+      }
+  
+    }catch(erro){
+
+      return response.status(500).json( { "erro" : erro } )
+
+    }
+
+  }
+
+  async getAllProject( request, response ) {
+  
+    try{
+
+      const result = await prorepo.findAllProject()
       if( result ){
         return response.status(201).json({ "result" : result })
       }else{
