@@ -1,7 +1,7 @@
 const { Skills } = require("../DataBase/models");
 
 
-module.exports = class studentRepo {
+module.exports = class skillRepo {
 
   async createSkills(studentId, name, description) {  
 

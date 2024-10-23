@@ -6,6 +6,7 @@ const logEvents = require('./src/Middlewares/log.middlewares');
 const addResponseHeaders = require('./src/Middlewares/addResponseHeaders.middlewares');
 const projectRouter = require('./src/Routes/project.routes');
 const skillRouter = require('./src/Routes/skill.routes');
+const userRouter = require('./src/Routes/user.routes');
 
 const app = express();
 app.use( express.json() );
@@ -20,6 +21,7 @@ app.use( express.json() );
 
 app.use( logEvents ); // Log de eventos
 app.use( addResponseHeaders ); // Adiciona headers na resposta
+app.use( userRouter );
 app.use( skillRouter );
 app.use( studentRouter );
 app.use( projectRouter );
