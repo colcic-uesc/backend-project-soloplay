@@ -2,9 +2,10 @@ const { Router } = require("express");
 const router = Router()
 const StudentController = require("../Controller/student.controller");
 const studentController = new StudentController()
+const { authenticateJWT } = require('../Middlewares/auth');
 
 //Buscar todas as conta
-router.get("/skill", async ( request, response ) => { await studentController.findAllSkill( request, response ) })
+router.get("/skill", authenticateJWT, async ( request, response ) => { await studentController.findAllSkill( request, response ) })
 //Criar uma conta
 // router.post("/skill", async (request, response) => { await studentController.createStudent( request, response ) })
 // //Atualizar um conta

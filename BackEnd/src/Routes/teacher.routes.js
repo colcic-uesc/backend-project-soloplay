@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router()
 const TeacherController = require("../Controller/teacher.controller");
 const teacherController = new TeacherController()
+const { authenticateJWT } = require('../Middlewares/auth');
 
 //Buscar todas as conta
 router.get("/teacher", async ( request, response ) => { await teacherController.getAllTeacher( request, response ) })

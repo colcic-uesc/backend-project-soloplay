@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "studentId", // Definindo a chave estrangeira do aluno
         otherKey: "teacherId", // Definindo a chave estrangeira do professor
         through: "StudentTeacher", constraints: false 
-      } )
+      })
     }
   }
   Student.init({

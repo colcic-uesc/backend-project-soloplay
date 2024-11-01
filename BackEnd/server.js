@@ -7,6 +7,7 @@ const addResponseHeaders = require('./src/Middlewares/addResponseHeaders.middlew
 const projectRouter = require('./src/Routes/project.routes');
 const skillRouter = require('./src/Routes/skill.routes');
 const userRouter = require('./src/Routes/user.routes');
+const auth = require('./src/Routes/auth.routes');
 
 const app = express();
 app.use( express.json() );
@@ -18,7 +19,7 @@ app.use( express.json() );
 //     optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
 
-
+app.use( auth );
 app.use( logEvents ); // Log de eventos
 app.use( addResponseHeaders ); // Adiciona headers na resposta
 app.use( userRouter );

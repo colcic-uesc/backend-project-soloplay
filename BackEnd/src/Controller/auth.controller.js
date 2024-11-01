@@ -1,5 +1,9 @@
 const userRepository = require("../Repository/user.repo");
 const userRepo = new userRepository();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const { User } = require('../DataBase/models');
+const { secret } = require('../Middlewares/auth');
 
 
 module.exports = class userController {
@@ -35,5 +39,23 @@ module.exports = class userController {
         }
     
     }
+
+    async login(request, response) {
+
+        const { username, password } = request.body;
+      
+        try {
+          const user = await User.findOne({ where: { username } });
+          if (!user || !(await bcrypt.compare(password, user.password))) {
+            return response.status(401).json({ message: 'Credenciais inválidas' });
+          }
+      
+          const token = jwt.sign({ id: user.id, username: user.username }, secret, { expiresIn: '1h' });
+          response.json({ token });
+        } catch (error) {
+          console.error(error);
+          response.status(500).json({ message: 'Erro no servidor' });
+        }
+    };
 
 }
