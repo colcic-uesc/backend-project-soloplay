@@ -21,6 +21,7 @@ module.exports = class userController {
             return response.status(500).json({ error: 'Erro ao registrar usuário.' });
 
         } catch (error) {
+          console.log(error)
             return response.status(500).json({ error: 'Erro ao registrar usuário.' });
         }
     };
@@ -57,5 +58,23 @@ module.exports = class userController {
           response.status(500).json({ message: 'Erro no servidor' });
         }
     };
+
+    async deleteUserId( request, response){
+
+        const { id } = request.query;
+
+        try{        
+            const result = await userRepo.deleteUserById(id);
+            if( result ){
+            return response.status(201).json({ "result" : "Removed" })
+            }else{
+            return response.status(400).json({ "result" : "Not Exits" })
+            }
+    
+        }catch(erro){
+            return response.status(500).json({"erro" : erro})
+        }
+
+    }
 
 }

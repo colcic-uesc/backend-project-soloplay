@@ -18,7 +18,6 @@ app.use( express.json() );
 //     credentials: true, // Habilitar o envio de credenciais (por exemplo, cookies)
 //     optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
-
 app.use( auth );
 app.use( logEvents ); // Log de eventos
 app.use( addResponseHeaders ); // Adiciona headers na resposta

@@ -5,12 +5,12 @@ const teacherController = new TeacherController()
 const { authenticateJWT } = require('../Middlewares/auth');
 
 //Buscar todas as conta
-router.get("/teacher", async ( request, response ) => { await teacherController.getAllTeacher( request, response ) })
+router.get("/teacher", authenticateJWT, async ( request, response ) => { await teacherController.getAllTeacher( request, response ) })
 //Criar uma conta
-router.post("/teacher", async (request, response) => { await teacherController.createTeacher( request, response ) })
+router.post("/teacher", authenticateJWT, async (request, response) => { await teacherController.createTeacher( request, response ) })
 //Atualizar um conta
-router.put("/teacher", async ( request, response) => { await teacherController.updateTeacher( request, response ) })
+router.put("/teacher", authenticateJWT, async ( request, response) => { await teacherController.updateTeacher( request, response ) })
 //Deletar uma conta pelo id
-router.delete("/teacher", async ( request, response) => { await teacherController.deleteTeacherId( request, response ) })
+router.delete("/teacher", authenticateJWT, async ( request, response) => { await teacherController.deleteTeacherId( request, response ) })
 
 module.exports = router

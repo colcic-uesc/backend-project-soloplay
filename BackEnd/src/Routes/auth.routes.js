@@ -4,6 +4,6 @@ const Auth = require('../Controller/auth.controller')
 const auth = new Auth();
 const router = express.Router();
 
-router.post('/login', async (request, response) => { auth.login( request, response ) });
+router.post('/auth', async (request, response) => { auth.login( request, response ) });
 
 module.exports = router;

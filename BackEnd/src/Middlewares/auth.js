@@ -5,7 +5,7 @@ const secret = 'your-secret-key'; // Use uma variável de ambiente para o secret
 
 const authenticateJWT = (req, res, next) => {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-  
+  console.log(token)
   if (!token) {
     return res.status(403).json({ message: 'Token não fornecido' });
   }

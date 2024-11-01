@@ -1,12 +1,12 @@
 const { User } = require("../DataBase/models");
+const bcrypt = require("bcryptjs")
 
 
 module.exports = class userRepo {
 
   async createUser(username, password) {  
-
-    console.log(username, password)
-
+    
+    password = bcrypt.hashSync(password);
     return await User.create({ username, password });
 
   }
@@ -45,7 +45,7 @@ module.exports = class userRepo {
 
   async deleteUserById(id) {
     
-    await User.destroy(
+    return await User.destroy(
       {
         where: {
             id,
